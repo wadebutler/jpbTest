@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Modal, Image } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { ActivityIndicator } from 'react-native';
 
 
 export default function Camera() {
@@ -19,11 +20,15 @@ export default function Camera() {
     }
 
     if (hasPermission === null || hasPermission === false) {
-        return <Text>Permission Required</Text>
+        return (
+            <View style={[styles.container, {justifyContent: 'center'}]}>
+                <ActivityIndicator size="large" color={"#000"} />
+            </View>
+        )
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {justifyContent: 'flex-end'}]}>
             <BarCodeScanner 
                 onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                 style={styles.camera}
@@ -50,12 +55,12 @@ export default function Camera() {
     const styles = StyleSheet.create({
         container: {
             flex: 1,
-            justifyContent: 'flex-end',
-            alignItems: 'center'
+            alignItems: 'center',
+
         },
         camera: {
-            width: '100%', 
-            height: '93%', 
+            width: '105%', 
+            height: '100%', 
             justifyContent: 'center', 
             alignItems: 'center'
         },

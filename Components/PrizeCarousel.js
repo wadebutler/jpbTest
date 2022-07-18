@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-export default function Item({route, navigation}) {
-    console.log(route)
+export default function PrizeCarousel() {
     return (
         <View style={styles.container}>
-            <Text>Item Screen {route.params.test}</Text>
+            
         </View>
     );
 }
