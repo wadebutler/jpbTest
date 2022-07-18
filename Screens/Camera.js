@@ -18,10 +18,6 @@ export default function Camera() {
         setScanned(true)
     }
 
-    function handleScratch(scratchPercentage) {
-        console.log(scratchPercentage)
-    }
-
     if (hasPermission === null || hasPermission === false) {
         return <Text>Permission Required</Text>
     }
@@ -30,7 +26,7 @@ export default function Camera() {
         <View style={styles.container}>
             <BarCodeScanner 
                 onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-                style={StyleSheet.absoluteFillObject}
+                style={styles.camera}
             />
 
             {
@@ -55,6 +51,12 @@ export default function Camera() {
         container: {
             flex: 1,
             justifyContent: 'flex-end',
+            alignItems: 'center'
+        },
+        camera: {
+            width: '100%', 
+            height: '93%', 
+            justifyContent: 'center', 
             alignItems: 'center'
         },
         modalBackdrop: {
