@@ -1,25 +1,25 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from './Screens/Home';
 import Camera from './Screens/Camera';
-import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { Provider } from 'react-redux';
+import { FontAwesome, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import { HomeNavigator } from './Navigation/HomeNavigation';
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import { RecoilRoot } from 'recoil';
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-
   return (
-    <NavigationContainer>
+    <RecoilRoot>
+      <NavigationContainer>
       <Tab.Navigator 
         screenOptions={{ 
           tabBarShowLabel: false,
           tabBarStyle: {
             backgroundColor: '#00CFC8',
-            height: 100,
+            height: 60,
             marginTop: 0
           }
         }}
@@ -39,8 +39,8 @@ export default function App() {
             headerTitle: "",
             headerTransparent: true,
             headerLeft: () => (
-              <TouchableOpacity style={{flexDirection: 'row', marginLeft: 10, marginTop: 20, paddingHorizontal: 10, paddingVertical: 5, backgroundColor: '#38465F', borderRadius: 50}} onPress={() => console.log(navigation.navigate('Home'))}>
-                <AntDesign name="arrowleft" size={24} color="#B3EBDA" />
+              <TouchableOpacity style={{flexDirection: 'row', marginLeft: 10, marginTop: 20, paddingHorizontal: 10, paddingVertical: 5, backgroundColor: '#38465F', borderRadius: 50}} onPress={() => navigation.navigate('Home')}>
+                <MaterialIcons name="keyboard-arrow-left" size={24} color="#B3EBDA" />
                 <Text style={{color: '#FCFCFC', fontSize: 14}}> Back</Text>
               </TouchableOpacity>
             ),
@@ -49,9 +49,6 @@ export default function App() {
         />
       </Tab.Navigator>
     </NavigationContainer>
+    </RecoilRoot>
   );
 }
-
-const styles = StyleSheet.create({
-
-})

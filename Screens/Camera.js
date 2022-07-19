@@ -2,11 +2,15 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Modal, Image } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { ActivityIndicator } from 'react-native';
+import { useRecoilState } from 'recoil';
+import { prizeAtom, prizeListAtom } from '../atoms';
+import { usePrizeList } from '../hooks/usePrizeList';
 
 
 export default function Camera() {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
+    const [prizeList, setPrizeList] = useRecoilState(prizeListAtom);
 
     useEffect(() => {
         (async () => {
@@ -18,6 +22,13 @@ export default function Camera() {
     const handleBarCodeScanned = () => {
         setScanned(true)
     }
+
+    const closeModal = () => {
+        prizeHook.addPrize("movie ticket")
+        setScanned(false)
+    }
+
+    const prizeHook = usePrizeList();
 
     if (hasPermission === null || hasPermission === false) {
         return (
@@ -41,7 +52,7 @@ export default function Camera() {
                     transparent={true}
                     visible={scanned}
                 >
-                    <TouchableOpacity style={styles.modalBackdrop} onPress={() => setScanned(false)}>
+                    <TouchableOpacity style={styles.modalBackdrop} onPress={() => closeModal()}>
                         <View style={{width: 250, height: 400, backgroundColor: '#000', alignItems: 'center', justifyContent: 'center'}}>
                             <Text style={{color: '#fff'}}>Ticket Prize</Text>
                         </View>
@@ -56,10 +67,9 @@ export default function Camera() {
         container: {
             flex: 1,
             alignItems: 'center',
-
         },
         camera: {
-            width: '105%', 
+            width: '112%', 
             height: '100%', 
             justifyContent: 'center', 
             alignItems: 'center'
