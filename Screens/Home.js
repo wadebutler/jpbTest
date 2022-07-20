@@ -5,12 +5,16 @@ import ContestRules from '../Components/ContestRules';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesome5 } from '@expo/vector-icons';
 import EmptyPrize from '../Components/EmptyPrize';
-import { usePrizeList } from '../hooks/usePrizeList';
+import {useScreen} from '../hooks/useScreen'
 
 export default function Home({navigation}) {
     const [scanned, setScanned] = useState(false);
+    const screenHook = useScreen();
 
-    const prizeHook = usePrizeList()
+    const handleNav = (route) => {
+        screenHook.updateScreen(route)
+        navigation.navigate("ItemList")
+    }
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -19,7 +23,7 @@ export default function Home({navigation}) {
                 <LinearGradient style={styles.prizeButton} colors={['#00A3FD', '#00D2C5']} start={[0, 0]} end={[1, 1]}>
                     <FontAwesome5 name="trophy" style={{marginRight: 10}} size={24} color="#1A222Fk" />
 
-                    <TouchableOpacity onPress={() => navigation.navigate("ItemList", 'prize')}>
+                    <TouchableOpacity onPress={() => handleNav("Prize")}>
                         <Text style={styles.label}>Prize Items</Text>
                     </TouchableOpacity>
                 </LinearGradient>
@@ -27,13 +31,13 @@ export default function Home({navigation}) {
                 <LinearGradient style={styles.prizeButton} colors={['#00D2C5', '#00FD91']} start={[0, 0]} end={[1, 1]}>
                     <FontAwesome5 name="store-alt" style={{marginRight: 10}} size={24} color="black" />
 
-                    <TouchableOpacity onPress={() => navigation.navigate("ItemList", "purchase")}>
+                    <TouchableOpacity onPress={() => handleNav("Purchase")}>
                         <Text style={styles.label}>Purchase Items</Text>
                     </TouchableOpacity>
                 </LinearGradient>
             </View>
 
-            <View style={{height: 600, width: '80%',}}>
+            <View style={styles.prizeContainer}>
                 {
                     !scanned ?
                     <EmptyPrize />
@@ -53,6 +57,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 20
+    },
+    prizeContainer: {
+        height: 600, 
+        width: '80%',
     },
     buttonContainer: {
         flexDirection: 'row', 

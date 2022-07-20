@@ -1,28 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
+import SearchBar from './SearchBar';
+import { useScreen } from '../hooks/useScreen';
 
-export default function ItemList({navigation, route}) {
-    const [listType, setListType] = useState(route.params === "prize" ? "prize" : 'purchase')
-    const testArr = ["item", "item", "item", "item"]
+export default function ItemList() {
+    const screenHook = useScreen();
+    
 
     return (
         <View style={styles.container}>
-            {
-                listType === "prize" ?
-                <Text>Prize List</Text>
-                :
-                <Text>Purchase List</Text>
-            }
-
-            {
-                testArr.map((item, index) => {
-                    return (
-                        <TouchableOpacity style={{marginVertical: 10}} onPress={() => {navigation.navigate("Item", {test: index + 1})}}>
-                            <Text>{item}</Text>
-                        </TouchableOpacity>
-                    )
-                })
-            }
+            <SearchBar />
         </View>
     );
 }
@@ -30,8 +17,7 @@ export default function ItemList({navigation, route}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#1A222F',
         alignItems: 'center',
-        justifyContent: 'center',
     },
 });

@@ -8,7 +8,7 @@ export const usePrizeList = () => {
         setPrizeList((prizeList) => [
             ...prizeList, 
             {
-                key: Math.floor(Math.random() * 100),
+                key: prizeList.length,
                 name: item
             }
         ])

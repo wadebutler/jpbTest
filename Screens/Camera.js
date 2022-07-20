@@ -2,15 +2,15 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Modal, Image } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { ActivityIndicator } from 'react-native';
-import { useRecoilState } from 'recoil';
-import { prizeAtom, prizeListAtom } from '../atoms';
 import { usePrizeList } from '../hooks/usePrizeList';
+import { usePrize } from '../hooks/usePrize';
 
 
 export default function Camera() {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
-    const [prizeList, setPrizeList] = useRecoilState(prizeListAtom);
+    const prizeListHook = usePrizeList();
+    const prizeHook = usePrize();
 
     useEffect(() => {
         (async () => {
@@ -24,11 +24,12 @@ export default function Camera() {
     }
 
     const closeModal = () => {
-        prizeHook.addPrize("movie ticket")
+        prizeListHook.addPrize("sample prize")
+        prizeHook.addPrize("sample prize")
         setScanned(false)
     }
 
-    const prizeHook = usePrizeList();
+    
 
     if (hasPermission === null || hasPermission === false) {
         return (
