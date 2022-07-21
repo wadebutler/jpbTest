@@ -8,11 +8,15 @@ export const usePrizeList = () => {
         setPrizeList((prizeList) => [
             ...prizeList, 
             {
-                key: prizeList.length,
+                key: prizeList.length + 1,
                 name: item
             }
         ])
     }
 
-    return {prizeList, addPrize}
+    function removePrize(key) {
+        setPrizeList((prizeList) => prizeList.filter((item) => item.key !== key.key))
+    }
+
+    return {prizeList, addPrize, removePrize}
 }

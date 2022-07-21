@@ -6,10 +6,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesome5 } from '@expo/vector-icons';
 import EmptyPrize from '../Components/EmptyPrize';
 import {useScreen} from '../hooks/useScreen'
+import { usePrize } from '../hooks/usePrize';
 
 export default function Home({navigation}) {
     const [scanned, setScanned] = useState(false);
     const screenHook = useScreen();
+    const prizeHook = usePrize()
 
     const handleNav = (route) => {
         screenHook.updateScreen(route)
@@ -39,10 +41,10 @@ export default function Home({navigation}) {
 
             <View style={styles.prizeContainer}>
                 {
-                    !scanned ?
+                    prizeHook.prize === '' ?
                     <EmptyPrize />
                     :
-                    <PrizeCarousel />
+                    <PrizeCarousel prize={prizeHook.prize} />
                 }
             </View>
 

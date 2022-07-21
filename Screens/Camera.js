@@ -5,7 +5,6 @@ import { ActivityIndicator } from 'react-native';
 import { usePrizeList } from '../hooks/usePrizeList';
 import { usePrize } from '../hooks/usePrize';
 
-
 export default function Camera() {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
@@ -19,13 +18,15 @@ export default function Camera() {
         })();
     }, [])
 
-    const handleBarCodeScanned = () => {
+    const handleBarCodeScanned = ({data}) => {
+        const prizeData = JSON.parse(data)
+        prizeHook.addPrize(prizeData)
         setScanned(true)
     }
 
     const closeModal = () => {
-        prizeListHook.addPrize("sample prize")
-        prizeHook.addPrize("sample prize")
+        // prizeListHook.addPrize("sample prize")
+        // prizeHook.addPrize("sample prize")
         setScanned(false)
     }
 
@@ -68,9 +69,10 @@ export default function Camera() {
         container: {
             flex: 1,
             alignItems: 'center',
+            backgroundColor: '#1A222F',
         },
         camera: {
-            width: '112%', 
+            width: '100%', 
             height: '100%', 
             justifyContent: 'center', 
             alignItems: 'center'

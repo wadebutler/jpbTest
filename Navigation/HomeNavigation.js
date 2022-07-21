@@ -37,13 +37,7 @@ export const HomeNavigator = ({navigation, route}) => {
                 name='Item' 
                 component={Item}
                 options={{
-                    headerTitle: "Purchase Items",
-                    headerTitleAlign: 'center',
-                    headerLeft: () => (
-                        <TouchableOpacity style={{marginLeft: 10}} onPress={() => navigation.goBack()}>
-                            <AntDesign name="arrowleft" size={24} color="black" />
-                        </TouchableOpacity>
-                    )
+                    headerShown: false
                 }}
             />
         </Stack.Navigator>

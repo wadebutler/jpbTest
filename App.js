@@ -1,7 +1,7 @@
+import React, {Suspense} from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Camera from './Screens/Camera';
-import { Provider } from 'react-redux';
 import { FontAwesome, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import { HomeNavigator } from './Navigation/HomeNavigation';
 import 'react-native-gesture-handler';
@@ -13,6 +13,7 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   return (
     <RecoilRoot>
+      <Suspense fallback={<Text>Loading</Text>}>
       <NavigationContainer>
       <Tab.Navigator 
         screenOptions={{ 
@@ -39,7 +40,7 @@ export default function App() {
             headerTitle: "",
             headerTransparent: true,
             headerLeft: () => (
-              <TouchableOpacity style={{flexDirection: 'row', marginLeft: 10, marginTop: 20, paddingHorizontal: 10, paddingVertical: 5, backgroundColor: '#38465F', borderRadius: 50}} onPress={() => navigation.navigate('Home')}>
+              <TouchableOpacity style={{flexDirection: 'row', backgroundColor: '#38465F', borderRadius: 50, height: 40, width: 70, alignItems: 'center', marginLeft: 10}} onPress={() => navigation.navigate('Home')}>
                 <MaterialIcons name="keyboard-arrow-left" size={24} color="#B3EBDA" />
                 <Text style={{color: '#FCFCFC', fontSize: 14}}> Back</Text>
               </TouchableOpacity>
@@ -49,6 +50,7 @@ export default function App() {
         />
       </Tab.Navigator>
     </NavigationContainer>
+    </Suspense>
     </RecoilRoot>
   );
 }

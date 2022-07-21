@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#1A222F',
         alignItems: 'center',
+        marginBottom: 20
     },
     input: {
         height: 40,
@@ -27,8 +28,8 @@ const styles = StyleSheet.create({
     },
     icon: {
         position: 'relative',
-        top: '45%',
-        left: '-40%',
+        top: 30,
+        left: -165,
         zIndex: 2
     }
 });
