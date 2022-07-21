@@ -19,7 +19,9 @@ export default function Camera() {
     }, [])
 
     const handleBarCodeScanned = ({data}) => {
+        
         const prizeData = JSON.parse(data)
+        console.log(prizeData)
         prizeHook.addPrize(prizeData)
         setScanned(true)
     }
